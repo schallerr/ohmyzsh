@@ -80,6 +80,7 @@ prompt_end() {
     echo -n "%{%k%}"
   fi
   echo -n "%{%f%}"
+  printf "\n ➜";
   CURRENT_BG=''
 }
 
@@ -130,8 +131,8 @@ prompt_git() {
     zstyle ':vcs_info:*' enable git
     zstyle ':vcs_info:*' get-revision true
     zstyle ':vcs_info:*' check-for-changes true
-    zstyle ':vcs_info:*' stagedstr '✚'
-    zstyle ':vcs_info:*' unstagedstr '±'
+    zstyle ':vcs_info:*' stagedstr '＋'
+    zstyle ':vcs_info:*' unstagedstr '✗'
     zstyle ':vcs_info:*' formats ' %u%c'
     zstyle ':vcs_info:*' actionformats ' %u%c'
     vcs_info
@@ -155,7 +156,7 @@ prompt_bzr() {
     status_all=$(echo -n "$bzr_status" | head -n1 | wc -m)
     revision=$(bzr log -r-1 --log-format line | cut -d: -f1)
     if [[ $status_mod -gt 0 ]] ; then
-      prompt_segment yellow black "bzr@$revision ✚"
+      prompt_segment yellow black "bzr@$revision ＋"
     else
       if [[ $status_all -gt 0 ]] ; then
         prompt_segment yellow black "bzr@$revision"
